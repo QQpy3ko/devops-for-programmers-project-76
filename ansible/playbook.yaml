@@ -1,0 +1,21 @@
+---
+
+- name: Deploying playbook
+
+  hosts: all
+
+  become: true
+
+  roles:
+
+    - role: geerlingguy.pip
+
+      name: Install pip/docker
+
+      vars:
+
+        pip_install_packages:
+
+          - name: docker
+
+            state: latest          
