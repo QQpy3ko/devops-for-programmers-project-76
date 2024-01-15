@@ -6,16 +6,12 @@
 
   become: true
 
+  vars:
+
+    pip_install_packages:
+
+      - name: docker
+
   roles:
 
     - role: geerlingguy.pip
-
-      name: Install pip/docker
-
-      vars:
-
-        pip_install_packages:
-
-          - name: docker
-
-            state: latest          
