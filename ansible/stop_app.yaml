@@ -1,0 +1,15 @@
+---
+
+- name: Stop all container apps
+
+  hosts: all
+
+  tasks:
+
+    - name: Just stop named container
+
+      community.docker.docker_container:
+
+        name: redmine
+
+        state: stopped

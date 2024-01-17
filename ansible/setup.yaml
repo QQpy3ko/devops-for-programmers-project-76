@@ -68,7 +68,13 @@
 
         - name: Create directory for Docker keyrings
 
-          ansible.builtin.shell: mkdir -m 0755 -p /etc/apt/keyrings
+          ansible.builtin.file:
+
+            path: /etc/apt/keyrings
+
+            state: directory
+
+            mode: '0755'
 
         - name: Download Docker GPG key
 

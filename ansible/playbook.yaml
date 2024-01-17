@@ -15,3 +15,45 @@
   roles:
 
     - role: geerlingguy.pip
+
+  tasks:
+
+    - name: Make directory for .env file
+
+      ansible.builtin.file:
+
+        path: /var/tmp/docker
+
+        state: directory
+
+        mode: '0755'
+
+    - name: Copy .env file
+
+      ansible.builtin.copy:
+
+        src: ../.env
+
+        dest: /var/tmp/docker/.env
+
+        # owner: 
+
+        # group: 
+
+        mode: '0755'
+
+    - name: Deploy redmine app
+
+      community.docker.docker_container:
+
+        name: redmine
+
+        image: redmine
+
+        env_file: /var/tmp/docker/.env
+
+        ports:
+
+          - "3000:3000"
+
+          - "3001:3001"
