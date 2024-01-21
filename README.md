@@ -52,3 +52,7 @@ Make file with secrets
 Encrypt or decrypt it
    ```make encrypt```
    ```make decrypt```
+
+### Added DataDog monitoring
+
+![DataDog monitoring dashboard](DataDog.png)

@@ -1,0 +1,7 @@
+init_config:
+
+instances:
+  - name: http_check_{{ inventory_hostname }}
+    url: http://localhost:3000
+    timeout: 15
+    min_collection_interval: 30    

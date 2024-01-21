@@ -1,23 +1,17 @@
 install-roles:
-	ansible-galaxy install -r requirements.yaml
-
-check-setup:
-	ansible-playbook --check ./ansible/setup.yaml -i ./ansible/inventory.ini
-
-setup:
-	ansible-playbook ./ansible/setup.yaml -i ./ansible/inventory.ini
+	ansible-galaxy install -r ./requirements.yml
 
 check-deploy:
-	ansible-playbook --check ./playbook.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
+	ansible-playbook --check ./playbook.yml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 deploy:
-	ansible-playbook ./playbook.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
+	ansible-playbook ./playbook.yml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 deploy-server1:
-	ansible-playbook --limit server1 ./playbook.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
+	ansible-playbook --limit server1 ./playbook.yml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 deploy-server2:
-	ansible-playbook --limit server2 ./playbook.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
+	ansible-playbook --limit server2 ./playbook.yml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 stop-app:
 	ansible-playbook ./ansible/stop_app.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
