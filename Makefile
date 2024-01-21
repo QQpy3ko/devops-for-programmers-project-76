@@ -1,11 +1,11 @@
 install-roles:
-	ansible-galaxy install -r requirements.yaml
+	ansible-galaxy install -r ./ansible/requirements.yaml
 
 check-setup:
-	ansible-playbook --check ./ansible/setup.yaml -i ./ansible/inventory.ini
+	ansible-playbook --check ./ansible/setup.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 setup:
-	ansible-playbook ./ansible/setup.yaml -i ./ansible/inventory.ini
+	ansible-playbook ./ansible/setup.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt
 
 check-deploy:
 	ansible-playbook --check ./playbook.yaml -i ./ansible/inventory.ini --vault-password-file ./vault_pass.txt

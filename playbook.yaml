@@ -45,3 +45,51 @@
           REDMINE_DB_POSTGRES: "{{ REDMINE_DB_POSTGRES }}"
 
           REDMINE_DB_USERNAME: "{{ REDMINE_DB_USERNAME }}"
+
+- name: Install Datadog monitoring
+
+  hosts: webservers
+
+  gather_facts: true
+
+  become: true
+
+  vars_files:
+
+    - ./ansible/group_vars/webservers/vault.yaml
+
+  vars:
+
+    datadog_api_key: "{{ DATADOG_API_KEY }}"
+
+    datadog_site: "{{ DATADOG_SITE }}"
+
+    app_key: "{{ DATADOG_APP_KEY }}"
+
+  roles:
+
+    - role: DataDog.datadog
+
+  tasks:
+
+    - name: Copy configuration file
+
+      ansible.builtin.template:
+
+        src: ./ansible/templates/datadog.yaml.j2
+
+        dest: /etc/datadog-agent/conf.d/http_check.d/conf.yaml
+
+        owner: root
+
+        group: root
+
+        mode: '0644'
+
+    - name: Restart agent
+
+      ansible.builtin.service:
+
+        name: datadog-agent
+
+        state: restarted
