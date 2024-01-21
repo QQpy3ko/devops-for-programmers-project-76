@@ -17,17 +17,38 @@
 
 ## Instructions
 
+### Deploy
+
 1. Clone repo
 2. ```cd repo```
 3. Install Ansible Galaxy roles and collections
    ```make install-roles```
-4. Make setup on remote servers
-   ```make setup```
-5. Deploy app on remote servers
+4. 
+   - a. Check setup play in dry mode (optionally) 
+      ```make check-setup```
+   - b. Make setup on remote servers
+      ```make setup```
+5. 
+   - a. Check deploy play in dry mode (optionally)
+      ```make check-deploy```
+   - b. Deploy app on remote servers
    ```make deploy```
+
+### Additionally
 
 Stop all the applications
    ```make stop-app```
 
 Remove unused containers on tremote servers
    ```delete-app```
+
+Make your own password for secrets
+   ```make vault-pass```
+   .gitignore it!
+
+Make file with secrets
+   ```make vault-file```
+
+Encrypt or decrypt it
+   ```make encrypt```
+   ```make decrypt```

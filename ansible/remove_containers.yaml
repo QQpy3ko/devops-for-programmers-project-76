@@ -7,9 +7,9 @@
   tasks:
 
     - name: Remove container
-      
+
       community.docker.docker_container:
-    
+
         name: redmine
-        
+
         state: absent
