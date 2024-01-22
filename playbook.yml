@@ -8,15 +8,13 @@
 
   vars:
 
-    # pip_install_packages:
+    pip_install_packages:
 
-    #   - name: docker
-
-    pip_executable: pip3
+      - name: docker
 
   vars_files:
 
-    - ./ansible/group_vars/webservers/vault.yaml
+    - ./ansible/group_vars/webservers/vault.yml
 
   roles:
 
@@ -58,7 +56,7 @@
 
   vars_files:
 
-    - ./ansible/group_vars/webservers/vault.yaml
+    - ./ansible/group_vars/webservers/vault.yml
 
   vars:
 

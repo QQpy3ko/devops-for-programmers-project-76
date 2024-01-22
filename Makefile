@@ -23,10 +23,10 @@ vault-pass:
 	echo 'WRITE_YOUR_PASS_HERE' > ./ansible/vault_pass.txt
 
 vault-file:
-	ansible-vault create --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yaml
+	ansible-vault create --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yml
 
 encrypt:
-	ansible-vault encrypt --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yaml
+	ansible-vault encrypt --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yml
 
 decrypt:
-	ansible-vault decrypt --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yaml
+	ansible-vault decrypt --vault-password-file ./vault_pass.txt ./ansible/group_vars/webservers/vault.yml

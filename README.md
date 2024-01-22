@@ -24,11 +24,6 @@
 3. Install Ansible Galaxy roles and collections
    ```make install-roles```
 4. 
-   - a. Check setup play in dry mode (optionally) 
-      ```make check-setup```
-   - b. Make setup on remote servers
-      ```make setup```
-5. 
    - a. Check deploy play in dry mode (optionally)
       ```make check-deploy```
    - b. Deploy app on remote servers
