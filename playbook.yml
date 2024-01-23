@@ -6,15 +6,9 @@
 
   become: true
 
-  vars:
-
-    pip_install_packages:
-
-      - name: docker
-
   vars_files:
 
-    - ./ansible/group_vars/webservers/vault.yml
+    - ./group_vars/webservers/vars.yml
 
   roles:
 
@@ -22,29 +16,37 @@
 
   tasks:
 
+    - name: Copy .env file
+
+      ansible.builtin.template:
+
+        src: docker.j2
+
+        dest: .env
+
+        owner: root
+
+        group: root
+
+        mode: u=rw,g=r,o=r
+
     - name: Deploy redmine app
 
       community.docker.docker_container:
 
-        name: "{{ APP_NAME }}"
+        name: redmine
 
         image: redmine
 
         auto_remove: true
 
+        env_file:
+
+          .env
+
         ports:
 
-          - "3000:3000"
-
-        env:
-
-          REDMINE_DB_PASSWORD: "{{ REDMINE_DB_PASSWORD }}"
-
-          REDMINE_DB_PORT: "{{ REDMINE_DB_PORT }}"
-
-          REDMINE_DB_POSTGRES: "{{ REDMINE_DB_POSTGRES }}"
-
-          REDMINE_DB_USERNAME: "{{ REDMINE_DB_USERNAME }}"
+          - "{{ app_port }}:{{ app_port }}"
 
 - name: Install Datadog monitoring
 
@@ -56,17 +58,17 @@
 
   vars_files:
 
-    - ./ansible/group_vars/webservers/vault.yml
+    - ./group_vars/webservers/vars.yml
 
   vars:
 
-    datadog_api_key: "{{ DATADOG_API_KEY }}"
+    datadog_api_key: "{{ datadog_api_key }}"
 
-    datadog_site: "{{ DATADOG_SITE }}"
+    datadog_site: "{{ datadog_site }}"
 
-    datadog_port: "{{ DATADOG_PORT }}"
+    datadog_port: "{{ app_port }}"
 
-    app_key: "{{ DATADOG_APP_KEY }}"
+    app_key: "{{ datadog_app_key }}"
 
   roles:
 
@@ -78,7 +80,7 @@
 
       ansible.builtin.template:
 
-        src: ./ansible/templates/datadog.yaml.j2
+        src: ./templates/datadog.yaml.j2
 
         dest: /etc/datadog-agent/conf.d/http_check.d/conf.yaml
 

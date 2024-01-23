@@ -50,4 +50,6 @@ Encrypt or decrypt it
 
 ### Added DataDog monitoring
 
+See all the hosts: infrastructure -> infrastructure list
+
 ![DataDog monitoring dashboard](DataDog.png)
